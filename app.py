@@ -54,6 +54,20 @@ def ratelimit_handler(e):
             jsonify(error="ratelimit exceeded %s" % e.description)
             , 429
     )
+
+######################### POST #####################################
+
+@app.route('/post')
+@limiter.limit("3 per minute")
+def quote_post():
+    from quote import quote_post
+    return jsonify(quote_post())
+@app.errorhandler(429)
+def ratelimit_handler(e):
+    return make_response(
+            jsonify(error="ratelimit exceeded %s" % e.description)
+            , 429
+    )
     
 if __name__ == "__main__":
     app.run(debug=True)
