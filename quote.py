@@ -9,8 +9,9 @@ def life_quote():
     q=data[0]  #quote
     a=data[1].replace('\n','')  #author
     result={
+        "q": q,
         "a": a,
-        "q": q
+        "h":f"<blockquote>&ldquo;{q}&rdquo; &mdash; <footer>{a}</footer></blockquote>" 
     }
     return result
 
@@ -23,8 +24,9 @@ def business_quote():
     q=data[0]  #quote
     a=data[1].replace('\n','')  #author
     result={
+        "q": q,
         "a": a,
-        "q": q
+        "h":f"<blockquote>&ldquo;{q}&rdquo; &mdash; <footer>{a}</footer></blockquote>" 
     }
     return result
 
@@ -37,8 +39,9 @@ def friendship_quote():
     q=data[0]  #quote
     a=data[1].replace('\n','')  #author
     result={
+        "q": q,
         "a": a,
-        "q": q
+        "h":f"<blockquote>&ldquo;{q}&rdquo; &mdash; <footer>{a}</footer></blockquote>" 
     }
     return result
 
@@ -51,8 +54,9 @@ def random_quote():
     q=data[0]  #quote
     a=data[1].replace('\n','')  #author
     result={
+        "q": q,
         "a": a,
-        "q": q
+        "h":f"<blockquote>&ldquo;{q}&rdquo; &mdash; <footer>{a}</footer></blockquote>" 
     }
     return result
 

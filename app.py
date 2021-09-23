@@ -4,6 +4,7 @@ from flask_limiter.util import get_remote_address
 
 from flask.json import jsonify
 app = Flask(__name__)
+app.config['JSON_SORT_KEYS'] = False
 limiter = Limiter(
     app,
     key_func=get_remote_address
