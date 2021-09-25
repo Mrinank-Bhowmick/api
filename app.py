@@ -1,8 +1,7 @@
 from flask import Flask,make_response,render_template
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
-import json
-import requests
+import random
 
 from flask.json import jsonify
 app = Flask(__name__,template_folder='template')
@@ -14,11 +13,15 @@ limiter = Limiter(
 
 @app.route('/')
 def hello_world():
-    data=requests.get('https://efflux.herokuapp.com/hustle')
-    data=json.loads(data.text)
-    welcome=data['q']
-    author=data['a']
-    return render_template('index.html',value=welcome,author=author)
+    fin=open('quotes_files//hustle.txt','r')
+    for count, line in enumerate(fin):
+        pass
+    fin.seek(0)
+    data=(fin.readlines()[random.randint(1,count)]).split('-')
+    q=data[0]  #quote
+    a=data[1].replace('\n','')  #author
+    fin.close()
+    return render_template('index.html',value=q,author=a)
 
 ##################### LIFE ################################
 
@@ -120,7 +123,7 @@ def ratelimit_handler(e):
 
 @app.route('/random')
 @limiter.limit("15 per minute")
-def random():
+def random_one():
     from quote import random_quote
     return jsonify(random_quote())
 @app.errorhandler(429)
