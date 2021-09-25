@@ -1,6 +1,8 @@
 from flask import Flask,make_response,render_template
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+import json
+import requests
 
 from flask.json import jsonify
 app = Flask(__name__,template_folder='template')
@@ -12,7 +14,11 @@ limiter = Limiter(
 
 @app.route('/')
 def hello_world():
-    return render_template('index.html')
+    data=requests.get('https://efflux.herokuapp.com/hustle')
+    data=json.loads(data.text)
+    welcome=data['q']
+    author=data['a']
+    return render_template('index.html',value=welcome,author=author)
 
 ##################### LIFE ################################
 
