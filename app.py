@@ -1,9 +1,9 @@
-from flask import Flask,make_response
+from flask import Flask,make_response,render_template
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
 from flask.json import jsonify
-app = Flask(__name__)
+app = Flask(__name__,template_folder='template')
 app.config['JSON_SORT_KEYS'] = False
 limiter = Limiter(
     app,
@@ -12,7 +12,7 @@ limiter = Limiter(
 
 @app.route('/')
 def hello_world():
-    return 'Hello, World!'
+    return render_template('index.html')
 
 ##################### LIFE ################################
 
@@ -56,7 +56,49 @@ def ratelimit_handler(e):
             , 429
     )
 
-######################### POST #####################################
+####################### LOVE #######################################
+
+@app.route('/love')
+@limiter.limit("15 per minute")
+def love():
+    from quote import love_quote
+    return jsonify(love_quote())
+@app.errorhandler(429)
+def ratelimit_handler(e):
+    return make_response(
+            jsonify(error="ratelimit exceeded %s" % e.description)
+            , 429
+    )
+
+####################### HUSTLE #######################################
+
+@app.route('/hustle')
+@limiter.limit("15 per minute")
+def hustle():
+    from quote import hustle_quote
+    return jsonify(hustle_quote())
+@app.errorhandler(429)
+def ratelimit_handler(e):
+    return make_response(
+            jsonify(error="ratelimit exceeded %s" % e.description)
+            , 429
+    )
+
+####################### WAR #######################################
+
+@app.route('/war')
+@limiter.limit("15 per minute")
+def war():
+    from quote import war_quote
+    return jsonify(war_quote())
+@app.errorhandler(429)
+def ratelimit_handler(e):
+    return make_response(
+            jsonify(error="ratelimit exceeded %s" % e.description)
+            , 429
+    )
+
+######################### MOTIVATIONAL POST #####################################
 
 @app.route('/post')
 @limiter.limit("3 per minute")
@@ -83,4 +125,4 @@ def ratelimit_handler(e):
     )
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
