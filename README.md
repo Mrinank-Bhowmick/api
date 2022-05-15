@@ -3,7 +3,7 @@
 # Check out main website:
 * https://efflux.herokuapp.com/ 
 
-## Sub-Domains
+## different quote urls
 
 * https://efflux.herokuapp.com/random
 * https://efflux.herokuapp.com/hustle
@@ -16,6 +16,7 @@
 # Todo 
 
 - [ ] Modifying readme.md file.
+- [ ] changing whole code to async with fastapi
 - [ ] Testing and fixing all the errors.
 - [ ] Feature to add quote by a user directly from website using GitHub actions/api.
 - [ ] Improving the code style.
